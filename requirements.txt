@@ -1,3 +1,361 @@
-streamlit
-google-genai
-pypdf
+
+/* ==========================================
+   STUDENT EXPENSE TRACKER
+   Theme: Sage Green & Warm Cream
+   Framework: Streamlit
+   ========================================== */
+
+/* ---------- COLOR PALETTE ---------- */
+:root {
+    --sage: #8ba88e;
+    --sage-light: #e8efe5;
+    --sage-pale: #f3f6ef;
+    --forest: #315b43;
+    --forest-dark: #244532;
+    --cream: #faf9f5;
+    --white: #ffffff;
+    --text: #28382d;
+    --muted: #718075;
+    --border: #dce5d9;
+    --danger: #b84f4f;
+    --warning: #a87525;
+    --shadow: 0 4px 18px rgba(49, 91, 67, 0.07);
+}
+
+/* ---------- MAIN PAGE ---------- */
+.stApp {
+    background-color: var(--cream);
+    color: var(--text);
+    font-family: "Segoe UI", sans-serif;
+}
+
+[data-testid="stAppViewContainer"] {
+    background-color: var(--cream);
+}
+
+[data-testid="stHeader"] {
+    background-color: rgba(250, 249, 245, 0.92);
+}
+
+[data-testid="stMain"] {
+    background-color: transparent;
+}
+
+[data-testid="stMainBlockContainer"] {
+    max-width: 1250px;
+    padding-top: 2.2rem;
+    padding-bottom: 3rem;
+}
+
+/* ---------- HEADINGS ---------- */
+h1, h2, h3, h4 {
+    color: var(--forest-dark) !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.5px;
+}
+
+h1 {
+    font-size: 2.35rem !important;
+    line-height: 1.3 !important;
+    margin-bottom: 0.35rem !important;
+}
+
+h2 {
+    font-size: 1.55rem !important;
+    margin-top: 0.8rem !important;
+    margin-bottom: 1rem !important;
+}
+
+h3 {
+    font-size: 1.2rem !important;
+    margin-bottom: 0.75rem !important;
+}
+
+/* ---------- BODY TEXT ---------- */
+p, label, li {
+    color: var(--text);
+}
+
+[data-testid="stCaptionContainer"] {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+/* ---------- SIDEBAR ---------- */
+[data-testid="stSidebar"] {
+    background-color: #edf2e9;
+    border-right: 1px solid var(--border);
+}
+
+[data-testid="stSidebar"] > div:first-child {
+    background-color: #edf2e9;
+}
+
+[data-testid="stSidebar"] h1,
+[data-testid="stSidebar"] h2,
+[data-testid="stSidebar"] h3 {
+    color: var(--forest-dark) !important;
+}
+
+[data-testid="stSidebar"] label {
+    color: var(--text);
+    font-weight: 600;
+}
+
+[data-testid="stSidebar"] [data-testid="stNumberInput"] {
+    background-color: var(--white);
+    border-radius: 12px;
+}
+
+/* ---------- METRIC CARDS ---------- */
+[data-testid="stMetric"] {
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 1.25rem 1.4rem;
+    box-shadow: var(--shadow);
+    min-height: 120px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+[data-testid="stMetric"]:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(49, 91, 67, 0.12);
+}
+
+[data-testid="stMetricLabel"] {
+    color: var(--muted) !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+}
+
+[data-testid="stMetricValue"] {
+    color: var(--forest) !important;
+    font-size: 1.8rem !important;
+    font-weight: 750 !important;
+}
+
+[data-testid="stMetricDelta"] {
+    font-size: 0.85rem;
+}
+
+/* ---------- BUTTONS ---------- */
+.stButton > button,
+.stFormSubmitButton > button {
+    background-color: var(--forest);
+    color: var(--white);
+    border: 1px solid var(--forest);
+    border-radius: 11px;
+    padding: 0.65rem 1.2rem;
+    min-height: 42px;
+    font-weight: 600;
+    transition: background-color 0.2s ease,
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.stButton > button:hover,
+.stFormSubmitButton > button:hover {
+    background-color: var(--forest-dark);
+    color: var(--white);
+    border-color: var(--forest-dark);
+    box-shadow: 0 4px 12px rgba(49, 91, 67, 0.18);
+    transform: translateY(-1px);
+}
+
+.stButton > button:focus,
+.stFormSubmitButton > button:focus {
+    box-shadow: 0 0 0 3px rgba(139, 168, 142, 0.35);
+    border-color: var(--sage);
+}
+
+/* ---------- INPUT FIELDS ---------- */
+.stTextInput input,
+.stNumberInput input,
+.stDateInput input,
+.stTextArea textarea {
+    background-color: var(--white);
+    color: var(--text);
+    border: 1px solid #d4dfd2;
+    border-radius: 10px;
+    padding: 0.65rem 0.8rem;
+}
+
+.stTextInput input:focus,
+.stNumberInput input:focus,
+.stDateInput input:focus,
+.stTextArea textarea:focus {
+    border-color: var(--sage);
+    box-shadow: 0 0 0 2px rgba(139, 168, 142, 0.18);
+}
+
+/* ---------- SELECT BOXES ---------- */
+[data-testid="stSelectbox"] [data-baseweb="select"] > div,
+[data-testid="stMultiSelect"] [data-baseweb="select"] > div {
+    background-color: var(--white);
+    border-color: #d4dfd2;
+    border-radius: 10px;
+}
+
+[data-testid="stSelectbox"] [data-baseweb="select"] span {
+    color: var(--text);
+}
+
+/* ---------- EXPENSE FORM ---------- */
+[data-testid="stForm"] {
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+}
+
+/* ---------- PROGRESS BAR ---------- */
+[data-testid="stProgressBar"] {
+    background-color: #dfe8dc;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+[data-testid="stProgressBar"] > div > div {
+    background-color: var(--sage);
+    border-radius: 20px;
+}
+
+/* ---------- DATA TABLES ---------- */
+[data-testid="stDataFrame"] {
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background-color: var(--white);
+}
+
+/* ---------- CHARTS ---------- */
+[data-testid="stVegaLiteChart"],
+[data-testid="stArrowVegaLiteChart"],
+[data-testid="stVegaLiteChart"] > div {
+    background-color: var(--white);
+    border-radius: 16px;
+}
+
+[data-testid="stPlotlyChart"] {
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 0.5rem;
+    box-shadow: var(--shadow);
+}
+
+/* ---------- EXPANDERS ---------- */
+[data-testid="stExpander"] {
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+[data-testid="stExpander"] summary {
+    color: var(--forest-dark);
+    font-weight: 600;
+}
+
+/* ---------- ALERTS AND MESSAGES ---------- */
+[data-testid="stAlert"] {
+    border-radius: 12px;
+    border: 1px solid var(--border);
+}
+
+[data-testid="stAlert"][kind="info"] {
+    background-color: var(--sage-pale);
+}
+
+[data-testid="stAlert"][kind="warning"] {
+    background-color: #fbf4e5;
+}
+
+[data-testid="stAlert"][kind="error"] {
+    background-color: #fbefed;
+}
+
+/* ---------- CHATBOT ---------- */
+[data-testid="stChatMessage"] {
+    background-color: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 0.9rem;
+    margin-bottom: 0.8rem;
+}
+
+[data-testid="stChatInput"] {
+    background-color: var(--white);
+    border-radius: 14px;
+}
+
+/* ---------- DIVIDERS ---------- */
+hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2rem 0;
+}
+
+/* ---------- LINKS ---------- */
+a {
+    color: var(--forest);
+}
+
+a:hover {
+    color: var(--forest-dark);
+}
+
+/* ---------- SCROLLBAR ---------- */
+::-webkit-scrollbar {
+    width: 9px;
+    height: 9px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--cream);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #bdcdbb;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--sage);
+}
+
+/* ---------- MOBILE RESPONSIVENESS ---------- */
+@media (max-width: 768px) {
+    [data-testid="stMainBlockContainer"] {
+        padding: 1.2rem 1rem 2rem;
+    }
+
+    h1 {
+        font-size: 1.8rem !important;
+    }
+
+    h2 {
+        font-size: 1.35rem !important;
+    }
+
+    [data-testid="stMetric"] {
+        padding: 1rem;
+        min-height: 100px;
+    }
+
+    [data-testid="stMetricValue"] {
+        font-size: 1.4rem !important;
+    }
+
+    [data-testid="stForm"] {
+        padding: 1rem;
+    }
+
+    .stButton > button,
+    .stFormSubmitButton > button {
+        width: 100%;
+    }
+}
